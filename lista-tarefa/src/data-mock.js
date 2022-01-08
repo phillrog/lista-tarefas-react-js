@@ -3,21 +3,21 @@ export const data = [
   {
     id: "1",
     Task: "Estudar",
-    Due_Date: "08-Janeiro-2022",
+    Due_Date: "05-Janeiro-2022",
   },
   {
     id: "2",
-    Task: "Trabalhar",
-    Due_Date: "09-Janeiro-2022",
+    Task: "Criar app lista de tarefas",
+    Due_Date: "07-Janeiro-2022",
   },
   {
     id: "3",
     Task: "Dockerizar aplicações",
-    Due_Date: "10-Fevereiro-2022",
+    Due_Date: "31-Janeiro-2022",
   },
   {
     id: "4",
     Task: "Criar api",
-    Due_Date: "31-Janeiro-2022",
+    Due_Date: "15-Janeiro-2022",
   }
 ]
