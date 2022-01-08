@@ -26,6 +26,9 @@ App para gravar lista de tarefas.
 
 # Tela 💥
 
+![image](https://user-images.githubusercontent.com/8622005/148626750-3b641e8f-fa3c-48fe-95b1-7f85bc428bad.png)
+
+
 # Como rodar ? 😱
 
 ```npm install ```
