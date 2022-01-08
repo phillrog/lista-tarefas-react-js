@@ -39,7 +39,7 @@ const Tarefas = ({ item, index }) => {
             <div className="secondary-details">
               <p>
                 <span>
-                  {new Date(item.Due_Date).toLocaleDateString('en-us', {
+                  {new Date(item.Due_Date).toLocaleDateString('pt-br', {
                     month: 'short',
                     day: '2-digit',
                   })}

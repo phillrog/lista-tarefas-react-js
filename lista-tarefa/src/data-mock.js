@@ -12,12 +12,12 @@ export const data = [
   },
   {
     id: "3",
-    Task: "Construir novo app",
-    Due_Date: "10-Janeiro-2022",
+    Task: "Dockerizar aplicações",
+    Due_Date: "10-Fevereiro-2022",
   },
   {
     id: "4",
     Task: "Criar api",
-    Due_Date: "4-Aug-2022",
+    Due_Date: "31-Janeiro-2022",
   }
 ]
