@@ -6,9 +6,9 @@ namespace ListaTarefas.Application.Commands
 {
     public class TarefaHandler : CommandHandler, IRequestHandler<CadastrarTarefaCommand, ValidationResult>
     {
-        public Task<ValidationResult> Handle(CadastrarTarefaCommand request, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(CadastrarTarefaCommand message, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            return message.ValidationResult;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ListaTarefas.Core.Data;
+﻿using FluentValidation.Results;
+using ListaTarefas.Core.Data;
 using ListaTarefas.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,7 @@ namespace ListaTarefas.Infra
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<ValidationResult>();
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ListaTarefaContext).Assembly);
             base.OnModelCreating(modelBuilder);
         }
