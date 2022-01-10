@@ -14,3 +14,4 @@ lista-tarefa/package-lock.json
 /src/services/ListaTarefas.Domain/obj
 /src/services/ListaTarefas.Infra/bin/Debug/net6.0
 /src/services/ListaTarefas.Infra/obj
+/src/services/.vs/ListaTarefas
