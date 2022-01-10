@@ -3,7 +3,7 @@ using ListaTarefas.Domain.Enums;
 
 namespace ListaTarefas.Domain.Entities
 {
-    public class Tarefa : Entity
+    public class Tarefa : Entity, IAggregateRoot
     {
         public int Descricao { get; private set; }
         public DateTime Vencimento { get; private set; }
