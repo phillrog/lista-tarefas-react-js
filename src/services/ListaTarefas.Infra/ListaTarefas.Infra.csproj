@@ -25,8 +25,4 @@
     <ProjectReference Include="..\ListaTarefas.Domain\ListaTarefas.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\Repositories\" />
-  </ItemGroup>
-
 </Project>

@@ -9,6 +9,7 @@ namespace ListaTarefas.Domain.Entities
         public DateTime Vencimento { get; private set; }
         public StatusEnum Status { get; private set; }
 
+        public Tarefa(){}
         public Tarefa(int descricao, DateTime vencimento, StatusEnum status)
         {
             Descricao = descricao;
