@@ -6,3 +6,11 @@ lista-tarefa/package-lock.json
 /src/services/.vs/ListaTarefas/v17
 /src/services/ListaTarefas.API/bin/Debug/net6.0
 /src/services/ListaTarefas.API/obj
+/src/building blocks/ListaTarefas.Core/bin/Debug/net6.0
+/src/building blocks/ListaTarefas.Core/obj
+/src/services/ListaTarefas.Application/bin/Debug/net6.0
+/src/services/ListaTarefas.Application/obj
+/src/services/ListaTarefas.Domain/bin/Debug/net6.0
+/src/services/ListaTarefas.Domain/obj
+/src/services/ListaTarefas.Infra/bin/Debug/net6.0
+/src/services/ListaTarefas.Infra/obj
