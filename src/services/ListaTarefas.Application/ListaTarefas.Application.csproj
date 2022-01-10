@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\building blocks\ListaTarefas.Core\ListaTarefas.Core.csproj" />
+    <ProjectReference Include="..\ListaTarefas.Domain\ListaTarefas.Domain.csproj" />
   </ItemGroup>
 
 </Project>

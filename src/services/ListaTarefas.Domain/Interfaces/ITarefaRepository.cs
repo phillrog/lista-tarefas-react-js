@@ -5,6 +5,6 @@ namespace ListaTarefas.Domain.Interfaces
 {
     public interface ITarefaRepository : IRepository<Tarefa>
     {
-
+        Task<Tarefa> ObterPorDescricao(string descricao);
     }
 }

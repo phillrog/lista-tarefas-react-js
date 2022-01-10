@@ -5,12 +5,12 @@ namespace ListaTarefas.Domain.Entities
 {
     public class Tarefa : Entity, IAggregateRoot
     {
-        public int Descricao { get; private set; }
+        public string Descricao { get; private set; }
         public DateTime Vencimento { get; private set; }
         public StatusEnum Status { get; private set; }
 
         public Tarefa(){}
-        public Tarefa(int descricao, DateTime vencimento, StatusEnum status)
+        public Tarefa(string descricao, DateTime vencimento, StatusEnum status)
         {
             Descricao = descricao;
             Vencimento = vencimento;
