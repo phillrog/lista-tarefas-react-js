@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListaTarefas.API", "ListaTarefas.API\ListaTarefas.API.csproj", "{415B6207-D809-40B1-AA98-275048D5986D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{415B6207-D809-40B1-AA98-275048D5986D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{415B6207-D809-40B1-AA98-275048D5986D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{415B6207-D809-40B1-AA98-275048D5986D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{415B6207-D809-40B1-AA98-275048D5986D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91C1F008-CBBF-4B7A-8F96-29728AE75326}
+	EndGlobalSection
+EndGlobal

@@ -1,1 +1,8 @@
 lista-tarefa/package-lock.json
+/.vs/api
+/api/bin/Debug/net6.0
+/api/obj
+/src/.vs/ListaTarefas
+/src/services/.vs/ListaTarefas/v17
+/src/services/ListaTarefas.API/bin/Debug/net6.0
+/src/services/ListaTarefas.API/obj
