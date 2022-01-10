@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\ListaTarefas.Core\ListaTarefas.Core.csproj" />
+  </ItemGroup>
+
 </Project>
