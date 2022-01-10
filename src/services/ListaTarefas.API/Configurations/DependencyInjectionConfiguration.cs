@@ -18,6 +18,7 @@ namespace ListaTarefas.API.Configurations
             services.AddScoped<IMediatorHandler, MediatorHandler>();
 
             services.AddScoped<IRequestHandler<CadastrarTarefaCommand, ValidationResult>, TarefaHandler>();
+            services.AddScoped<IRequestHandler<SolicitarCadastroTarefaCommand, ValidationResult>, TarefaHandler>();
         }
     }
 }
