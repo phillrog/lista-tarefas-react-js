@@ -19,7 +19,10 @@ App para gravar lista de tarefas.
 # TODO 👷 
 
 - [x] Criar App Lista de tarefas
-- [ ] Criar API .Net
+- [x] Criar API .Net
+- [x] Configurar e implementar comandos iniciais / preparar CQRS
+- [x] Implementar service bus
+- [x] Configurar RabbitMQ
 - [ ] Consumir api no App
 - [ ] Dockerizar aplicações
 - [ ] Configurar cache com Redis
