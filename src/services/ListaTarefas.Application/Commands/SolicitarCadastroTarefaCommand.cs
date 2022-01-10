@@ -11,6 +11,7 @@ namespace ListaTarefas.Application.Commands
         {
             Descricao = descricao;
             Vencimento = vencimento;
+            AggregateId = Guid.NewGuid();
         }
 
         public override bool EhValido()

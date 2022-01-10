@@ -1,4 +1,6 @@
 ﻿using FluentValidation.Results;
+using ListaTarefas.Application.Events;
+using ListaTarefas.Core.Mediator;
 using ListaTarefas.Core.Messages;
 using ListaTarefas.Domain.Interfaces;
 using MediatR;
@@ -9,10 +11,13 @@ namespace ListaTarefas.Application.Commands
         IRequestHandler<SolicitarCadastroTarefaCommand, ValidationResult>
     {
         private readonly ITarefaRepository _tarefaRepository;
+        private readonly IMediatorHandler _mediator;
 
-        public TarefaHandler(ITarefaRepository tarefaRepository)
+        public TarefaHandler(ITarefaRepository tarefaRepository,
+            IMediatorHandler mediator)
         {
             _tarefaRepository = tarefaRepository;
+            _mediator = mediator;
         }
 
         public async Task<ValidationResult> Handle(CadastrarTarefaCommand message, CancellationToken cancellationToken)
@@ -34,6 +39,8 @@ namespace ListaTarefas.Application.Commands
                 AdicionarErro("Já foi cadastrado esta tarefa");
                 return ValidationResult;
             }
+
+            await _mediator.PublicarEvento<CadastroSolicitadoEvent>(new CadastroSolicitadoEvent(message.Descricao, message.Vencimento));
 
             return ValidationResult;
         }
