@@ -32,9 +32,10 @@ namespace ListaTarefas.Domain.Services
             await _tarefaRepository.UnitOfWork.Commit();
         }
 
-        public Task Remover(Guid id)
+        public async Task Remover(Guid id)
         {
-            throw new NotImplementedException();
+            await _tarefaRepository.Remover(id);
+            /// TODO: Notificar o front-end cadastro com sucesso
         }
     }
 }
