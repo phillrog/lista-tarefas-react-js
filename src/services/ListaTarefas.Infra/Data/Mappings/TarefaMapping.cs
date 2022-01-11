@@ -13,6 +13,8 @@ namespace ListaTarefas.Infra.Data.Mappings
             builder.Property(s => s.Descricao).HasMaxLength(250);
             builder.Property(s => s.Vencimento);
             builder.Property(s => s.Status);
+            builder.Property(s => s.DataCadastro);
+            builder.Property(s => s.DataAtualizacao);
         }
     }
 }

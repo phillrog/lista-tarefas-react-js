@@ -21,14 +21,12 @@ namespace ListaTarefas.Infra.Data.Repositories
 		public virtual async Task Adicionar(TEntity entity)
 		{
 			_dbSet.Add(entity);
-			await SaveChanges();
 		}
 
 		public virtual async Task Atualizar(TEntity entity)
 		{
 			_dbContext.Entry<TEntity>(entity).State = EntityState.Modified;
 			_dbSet.Update(entity);
-			await SaveChanges();
 		}
 
 		public virtual async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
@@ -49,7 +47,6 @@ namespace ListaTarefas.Infra.Data.Repositories
 		public virtual async Task Remover(Guid id)
 		{
 			_dbSet.Remove(new TEntity { Id = id });
-			await SaveChanges();
 		}
 
 		public virtual async Task<int> SaveChanges()
