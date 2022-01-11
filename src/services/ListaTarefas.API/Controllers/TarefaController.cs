@@ -25,5 +25,17 @@ namespace ListaTarefas.API.Controllers
 
             return CustomResponse();
         }
+
+        [HttpPut("editar-tarefa/{id}")]
+        public async Task<IActionResult> CadastrarTarefa(Guid id, EditarTarefaViewModel viewModel)
+        {
+            if (id != viewModel.Id) return BadRequest();
+
+            var comando = new SolicitarEdicaoTarefaCommand(viewModel.Id,viewModel.Descricao, viewModel.Vencimento, viewModel.Status);
+            var result = await _mediator.EnviarComando<SolicitarEdicaoTarefaCommand>(comando);
+            if (!OperacaoValida()) CustomResponse(result);
+
+            return CustomResponse();
+        }
     }
 }
