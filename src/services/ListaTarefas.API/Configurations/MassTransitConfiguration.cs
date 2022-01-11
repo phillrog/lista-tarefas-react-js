@@ -17,6 +17,7 @@ namespace ListaTarefas.API.Configurations
                 bus.SetKebabCaseEndpointNameFormatter();
                 bus.AddConsumer<CadastroSolicitadoConsumer>();
                 bus.AddConsumer<EdicaoCadastroSolicitadoConsumer>();
+                bus.AddConsumer<RemocaoCadastroSolicitadoConsumer>();
 
                 bus.UsingRabbitMq((ctx, cfg) =>
                 {
@@ -59,7 +60,7 @@ namespace ListaTarefas.API.Configurations
                         opt.UseMessageRetry(x => x.Interval(Convert.ToInt32(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:RetryCount").Value)
                             , Convert.ToInt32(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:RetryInterval").Value)));
                         opt.UseInMemoryOutbox();
-                        opt.ConfigureConsumer<EdicaoCadastroSolicitadoConsumer>(ctx);
+                        opt.ConfigureConsumer<RemocaoCadastroSolicitadoConsumer>(ctx);
                         opt.Bind(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:Consumer").Value, s =>
                         {
                             s.ExchangeType = ExchangeType.Direct;
