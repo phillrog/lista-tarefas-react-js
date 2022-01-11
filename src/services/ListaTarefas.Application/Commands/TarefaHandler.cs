@@ -9,7 +9,8 @@ namespace ListaTarefas.Application.Commands
 {
     public class TarefaHandler : CommandHandler,
         IRequestHandler<SolicitarCadastroTarefaCommand, ValidationResult>,
-        IRequestHandler<SolicitarEdicaoTarefaCommand, ValidationResult>
+        IRequestHandler<SolicitarEdicaoTarefaCommand, ValidationResult>,
+        IRequestHandler<SolicitarRemocaoTarefaCommand, ValidationResult>
     {
         private readonly ITarefaRepository _tarefaRepository;
         private readonly IMediatorHandler _mediator;
@@ -59,6 +60,26 @@ namespace ListaTarefas.Application.Commands
             await _mediator.PublicarEvento<EdicaoSolicitadaEvent>(
                 new EdicaoSolicitadaEvent(message.Id, 
                     message.Descricao, message.Vencimento, message.Status));
+
+            return ValidationResult;
+        }
+
+        public async Task<ValidationResult> Handle(SolicitarRemocaoTarefaCommand message, CancellationToken cancellationToken)
+        {
+            if (!message.EhValido())
+            {
+                AdicionarErro("Solicitação é inválida");
+                return message.ValidationResult;
+            }
+
+            var tarefaExiste = await _tarefaRepository.ObterPorId(message.Id);
+            if (tarefaExiste == null)
+            {
+                AdicionarErro("Tarefa não foi encontrada");
+                return ValidationResult;
+            }
+
+            
 
             return ValidationResult;
         }

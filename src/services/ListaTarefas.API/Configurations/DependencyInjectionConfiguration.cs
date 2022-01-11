@@ -22,6 +22,7 @@ namespace ListaTarefas.API.Configurations
 
             services.AddScoped<IRequestHandler<SolicitarCadastroTarefaCommand, ValidationResult>, TarefaHandler>();
             services.AddScoped<IRequestHandler<SolicitarEdicaoTarefaCommand, ValidationResult>, TarefaHandler>();
+            services.AddScoped<IRequestHandler<SolicitarRemocaoTarefaCommand, ValidationResult>, TarefaHandler>();
 
             services.AddScoped<INotificationHandler<CadastroSolicitadoEvent>, TarefaEventHandler>();
             services.AddScoped<INotificationHandler<EdicaoSolicitadaEvent>, TarefaEventHandler>();
