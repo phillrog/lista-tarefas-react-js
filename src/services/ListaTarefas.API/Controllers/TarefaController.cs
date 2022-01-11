@@ -43,7 +43,11 @@ namespace ListaTarefas.API.Controllers
         {
             if (id == Guid.Empty) return BadRequest();
 
-           return CustomResponse();
+            var comando = new SolicitarRemocaoTarefaCommand(id);
+            var result = await _mediator.EnviarComando<SolicitarRemocaoTarefaCommand>(comando);
+            if (!OperacaoValida()) CustomResponse(result);
+
+            return CustomResponse();
         }
     }
 }
