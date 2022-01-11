@@ -4,7 +4,8 @@ using MediatR;
 
 namespace ListaTarefas.Application.Events
 {
-    public class TarefaEventHandler : INotificationHandler<CadastroSolicitadoEvent>
+    public class TarefaEventHandler : INotificationHandler<CadastroSolicitadoEvent>,
+        INotificationHandler<EdicaoSolicitadaEvent>
     {
         private readonly IPublishEndpoint _publishEndpoint;
 
@@ -22,6 +23,20 @@ namespace ListaTarefas.Application.Events
                 message.MessageType,
                 message.Timestamp,
                 message.Vencimento
+            });
+        }
+
+        public async Task Handle(EdicaoSolicitadaEvent message, CancellationToken cancellationToken)
+        {
+            await _publishEndpoint.Publish<IEdicaoSolicitada>(new
+            {
+                message.Id,
+                message.AggregateId,
+                message.Descricao,
+                message.MessageType,
+                message.Timestamp,
+                message.Vencimento,
+                message.Status
             });
         }
     }
