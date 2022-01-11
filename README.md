@@ -5,23 +5,23 @@ App para gravar lista de tarefas.
 
 * Javascript
 * React
-* C#
+* C# .Net Core
+
+# Arquitetura 🔎
+
+* DDD
+* CQRS
+* Event Driven
+
+# Bibliotecas 🔔
+
+* ```npm i react-beautiful-dnd @emotion/styled @emotion/react uuid```
 * Entity Framework
 * FluentValidation
 * Masstransit
 * MediatR
-
-# Tecnologias 💛
-
-* .Net Core
-* Redis
 * RabbitMQ
-
-# Arquitetura
-
-# Bibliotecas
-
-```npm i react-beautiful-dnd @emotion/styled @emotion/react uuid```
+* Redis
 
 # TODO 👷 
 
@@ -44,7 +44,7 @@ App para gravar lista de tarefas.
 ```npm install ```
 ```npm start```
 
-# Exemplo de mensagem que cai no RabbitMQ
+# Exemplo de mensagem que cai no RabbitMQ 👀
 
 ```
 {
