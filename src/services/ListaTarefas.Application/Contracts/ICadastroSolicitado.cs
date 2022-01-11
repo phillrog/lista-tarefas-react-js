@@ -2,7 +2,7 @@
 {
     public interface ICadastroSolicitado
     {
-        public Guid AgregateId { get; }
+        public Guid AggregateId { get; }
         public string Descricao { get; }
         public DateTime Vencimento { get; }
         public DateTime Timestamp { get; }

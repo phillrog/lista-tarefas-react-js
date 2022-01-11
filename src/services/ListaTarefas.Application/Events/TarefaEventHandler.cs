@@ -15,7 +15,14 @@ namespace ListaTarefas.Application.Events
 
         public async Task Handle(CadastroSolicitadoEvent message, CancellationToken cancellationToken)
         {
-            await _publishEndpoint.Publish<ICadastroSolicitado>(new { message.AggregateId, message.Descricao, message.MessageType, message.Timestamp });
+            await _publishEndpoint.Publish<ICadastroSolicitado>(new
+            {
+                message.AggregateId,
+                message.Descricao,
+                message.MessageType,
+                message.Timestamp,
+                message.Vencimento
+            });
         }
     }
 }
