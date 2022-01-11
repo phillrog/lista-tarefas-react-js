@@ -12,5 +12,13 @@
             Descricao = descricao;
             Vencimento = vencimento;
         }
+
+        public TarefaDTO(Guid id, string descricao, DateTime vencimento, int status)
+        {
+            Id = id;
+            Descricao = descricao;
+            Vencimento = vencimento;
+            Status = status;
+        }
     }
 }
