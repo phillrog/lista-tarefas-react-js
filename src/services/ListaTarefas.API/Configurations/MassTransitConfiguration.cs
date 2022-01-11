@@ -52,6 +52,20 @@ namespace ListaTarefas.API.Configurations
                         });
 
                     });
+
+                    cfg.ReceiveEndpoint(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:Queue").Value, opt =>
+                    {
+                        opt.PrefetchCount = Convert.ToInt32(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:PrefetchCount").Value);
+                        opt.UseMessageRetry(x => x.Interval(Convert.ToInt32(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:RetryCount").Value)
+                            , Convert.ToInt32(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:RetryInterval").Value)));
+                        opt.UseInMemoryOutbox();
+                        opt.ConfigureConsumer<EdicaoCadastroSolicitadoConsumer>(ctx);
+                        opt.Bind(configuration.GetSection("AppSettingsBus:RemocaoCadastroSolicitadoConsumer:Consumer").Value, s =>
+                        {
+                            s.ExchangeType = ExchangeType.Direct;
+                        });
+
+                    });
                 });
             });
             services.AddMassTransitHostedService(true);

@@ -20,5 +20,10 @@
             Vencimento = vencimento;
             Status = status;
         }
+
+        public TarefaDTO(Guid id)
+        {
+            Id = id;
+        }
     }
 }
