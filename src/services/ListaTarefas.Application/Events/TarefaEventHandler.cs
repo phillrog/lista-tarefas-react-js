@@ -5,7 +5,8 @@ using MediatR;
 namespace ListaTarefas.Application.Events
 {
     public class TarefaEventHandler : INotificationHandler<CadastroSolicitadoEvent>,
-        INotificationHandler<EdicaoSolicitadaEvent>
+        INotificationHandler<EdicaoSolicitadaEvent>,
+        INotificationHandler<RemocaoSolicitadaEvent>
     {
         private readonly IPublishEndpoint _publishEndpoint;
 
@@ -38,6 +39,11 @@ namespace ListaTarefas.Application.Events
                 message.Vencimento,
                 message.Status
             });
+        }
+
+        public Task Handle(RemocaoSolicitadaEvent notification, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

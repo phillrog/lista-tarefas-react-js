@@ -26,6 +26,7 @@ namespace ListaTarefas.API.Configurations
 
             services.AddScoped<INotificationHandler<CadastroSolicitadoEvent>, TarefaEventHandler>();
             services.AddScoped<INotificationHandler<EdicaoSolicitadaEvent>, TarefaEventHandler>();
+            services.AddScoped<INotificationHandler<RemocaoSolicitadaEvent>, TarefaEventHandler>();
 
             services.AddScoped<ICadastroTarefaService, CadastroTarefaService>();
             services.AddScoped<ITarefaService, TarefaService>();
