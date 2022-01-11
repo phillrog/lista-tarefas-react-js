@@ -41,9 +41,15 @@ namespace ListaTarefas.Application.Events
             });
         }
 
-        public Task Handle(RemocaoSolicitadaEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(RemocaoSolicitadaEvent message, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            await _publishEndpoint.Publish<ICadastroSolicitado>(new
+            {
+                message.Id,
+                message.AggregateId,
+                message.MessageType,
+                message.Timestamp
+            });
         }
     }
 }
