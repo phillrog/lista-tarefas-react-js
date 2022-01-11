@@ -43,7 +43,7 @@ namespace ListaTarefas.Application.Events
 
         public async Task Handle(RemocaoSolicitadaEvent message, CancellationToken cancellationToken)
         {
-            await _publishEndpoint.Publish<ICadastroSolicitado>(new
+            await _publishEndpoint.Publish<IRemocaoSolicitada>(new
             {
                 message.Id,
                 message.AggregateId,
