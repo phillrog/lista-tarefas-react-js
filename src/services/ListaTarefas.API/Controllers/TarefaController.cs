@@ -27,7 +27,7 @@ namespace ListaTarefas.API.Controllers
         }
 
         [HttpPut("editar-tarefa/{id}")]
-        public async Task<IActionResult> CadastrarTarefa(Guid id, EditarTarefaViewModel viewModel)
+        public async Task<IActionResult> EditarTarefa(Guid id, EditarTarefaViewModel viewModel)
         {
             if (id != viewModel.Id) return BadRequest();
 
@@ -36,6 +36,14 @@ namespace ListaTarefas.API.Controllers
             if (!OperacaoValida()) CustomResponse(result);
 
             return CustomResponse();
+        }
+
+        [HttpDelete("remover-tarefa/{id}")]
+        public async Task<IActionResult> RemoverTarefa(Guid id)
+        {
+            if (id == Guid.Empty) return BadRequest();
+
+           return CustomResponse();
         }
     }
 }
