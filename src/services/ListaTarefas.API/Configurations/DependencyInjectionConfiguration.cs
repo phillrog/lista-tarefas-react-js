@@ -1,8 +1,10 @@
 ﻿using FluentValidation.Results;
 using ListaTarefas.Application.Commands;
 using ListaTarefas.Application.Events;
+using ListaTarefas.Application.Services;
 using ListaTarefas.Core.Mediator;
 using ListaTarefas.Domain.Interfaces;
+using ListaTarefas.Domain.Services;
 using ListaTarefas.Infra;
 using ListaTarefas.Infra.Data.Repositories;
 using MediatR;
@@ -22,6 +24,9 @@ namespace ListaTarefas.API.Configurations
             services.AddScoped<IRequestHandler<SolicitarCadastroTarefaCommand, ValidationResult>, TarefaHandler>();
 
             services.AddScoped<INotificationHandler<CadastroSolicitadoEvent>, TarefaEventHandler>();
+
+            services.AddScoped<ICadastroTarefaService, CadastroTarefaService>();
+            services.AddScoped<ITarefaService, TarefaService>();
         }
     }
 }
