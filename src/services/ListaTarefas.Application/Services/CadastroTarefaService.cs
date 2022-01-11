@@ -9,6 +9,7 @@ namespace ListaTarefas.Application.Services
     public interface ICadastroTarefaService
     {
         Task Cadastrar(TarefaDTO tarefa);
+        Task Editar(TarefaDTO tarefa);
     }
 
     public class CadastroTarefaService : ICadastroTarefaService
@@ -22,6 +23,11 @@ namespace ListaTarefas.Application.Services
         public async Task Cadastrar(TarefaDTO tarefa)
         {
             await _tarefaServiceDomain.Adicionar(new Tarefa(tarefa.Descricao, tarefa.Vencimento, StatusEnum.AFazer));
+        }
+
+        public async Task Editar(TarefaDTO tarefa)
+        {
+            await _tarefaServiceDomain.Editar(new Tarefa(tarefa.Id, tarefa.Descricao, tarefa.Vencimento, (StatusEnum)tarefa.Status, DateTime.Now));
         }
     }
 }
