@@ -7,5 +7,7 @@
         public int RetryCount { get; set; }
         public int RetryInterval { get; set; }
         public string Queue { get; set; }
+        public string Exchange { get; set; }
+        public string Consumer { get; set; }
     }
 }
