@@ -79,7 +79,7 @@ namespace ListaTarefas.Application.Commands
                 return ValidationResult;
             }
 
-            
+            await _mediator.PublicarEvento<RemocaoSolicitadaEvent>(new RemocaoSolicitadaEvent(message.Id));
 
             return ValidationResult;
         }
