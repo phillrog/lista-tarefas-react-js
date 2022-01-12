@@ -7,5 +7,6 @@ namespace ListaTarefas.Domain.Interfaces
         Task Adicionar(Tarefa tarefa);
         Task Editar(Tarefa tarefa);
         Task Remover(Guid id);
+        Task<IEnumerable<Tarefa>> Listar();
     }
 }

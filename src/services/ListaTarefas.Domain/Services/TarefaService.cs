@@ -31,12 +31,17 @@ namespace ListaTarefas.Domain.Services
             /// TODO: Notificar o front-end cadastro com sucesso
             await _tarefaRepository.UnitOfWork.Commit();
         }
-
+        
         public async Task Remover(Guid id)
         {
             await _tarefaRepository.Remover(id);
             await _tarefaRepository.UnitOfWork.Commit();
             /// TODO: Notificar o front-end cadastro com sucesso
+        }
+
+        public async Task<IEnumerable<Tarefa>> Listar()
+        {
+            return await _tarefaRepository.ObterTodos();
         }
     }
 }
