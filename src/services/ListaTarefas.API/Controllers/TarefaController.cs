@@ -1,4 +1,5 @@
 ﻿using ListaTarefas.Application.Commands;
+using ListaTarefas.Application.Queries;
 using ListaTarefas.Application.ViewModels;
 using ListaTarefas.Core.Mediator;
 using Microsoft.AspNetCore.Mvc;
@@ -48,6 +49,17 @@ namespace ListaTarefas.API.Controllers
             if (!OperacaoValida()) CustomResponse(result);
 
             return CustomResponse();
+        }
+
+        [HttpGet("listar")]
+        public async Task<IActionResult> Listar()
+        {            
+            var query = new ListarTarefasQuery();
+            var result = await _mediator.EnviarQuery<ListarTarefasQuery>(query);
+
+            if (result.Data.Count() == 0) return CustomResponse();
+
+            return CustomResponse(result.Data.Cast<TarefaViewModel>());
         }
     }
 }
