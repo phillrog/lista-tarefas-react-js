@@ -37,7 +37,7 @@ namespace ListaTarefas.Application.Events
                 message.MessageType,
                 message.Timestamp,
                 message.Vencimento,
-                message.Status
+                Status = (int)message.Status
             });
         }
 
