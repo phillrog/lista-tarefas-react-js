@@ -6,7 +6,7 @@ using MediatR;
 
 namespace ListaTarefas.Application.Queries
 {
-    public class TarefaQueryHandler : QueryHandler,IRequestHandler<ListarTarefasQuery, ResponseQueryResult>
+    public class TarefaQueryHandler : QueryHandler<List<TarefaViewModel>>, IRequestHandler<ListarTarefasQuery, IEnumerable<TarefaViewModel>>
     {
         private readonly ICadastroTarefaService _cadastroTarefaService;
 
@@ -14,12 +14,15 @@ namespace ListaTarefas.Application.Queries
         {
             _cadastroTarefaService = cadastroTarefaService;
         }
-        public async Task<ResponseQueryResult> Handle(ListarTarefasQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TarefaViewModel>> Handle(ListarTarefasQuery request, CancellationToken cancellationToken)
         {
             var tarefas = await _cadastroTarefaService.Listar();
 
             if (tarefas == null || tarefas.Count() == 0) return ResponseQueryResult;
-            Adicionar(tarefas.Select(t => new TarefaViewModel(t.Id, t.Descricao, t.Vencimento, t.Status, t.DataCadastro, t.DataAtualizacao)));
+
+            ResponseQueryResult.AddRange(tarefas.Select(t => new TarefaViewModel(t.Id, t.Descricao, t.Vencimento, t.Status, t.DataCadastro, t.DataAtualizacao))
+                .ToList());
+
             return ResponseQueryResult;
         }
     }

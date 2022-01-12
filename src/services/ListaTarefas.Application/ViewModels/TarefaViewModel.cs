@@ -2,7 +2,7 @@
 
 namespace ListaTarefas.Application.ViewModels
 {
-    public class TarefaViewModel : QueryResult
+    public class TarefaViewModel : IQueryResult
     {
         public Guid Id { get; set; }
         public string Descricao { get; set; }

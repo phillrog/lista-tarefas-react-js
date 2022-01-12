@@ -2,18 +2,13 @@
 
 namespace ListaTarefas.Core.Messages
 {
-    public class QueryHandler
+    public class QueryHandler<T>
     {
-        protected ResponseQueryResult ResponseQueryResult;
+        protected T ResponseQueryResult;
 
         protected QueryHandler()
         {
-            ResponseQueryResult = new ResponseQueryResult();
-        }
-
-        protected void Adicionar(IEnumerable<QueryResult> result)
-        {
-            ResponseQueryResult.Data.AddRange(result);
-        }        
+            ResponseQueryResult = (T)Activator.CreateInstance(typeof(T), null);
+        }             
     }
 }

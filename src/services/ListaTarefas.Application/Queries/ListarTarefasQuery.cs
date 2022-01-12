@@ -1,8 +1,9 @@
-﻿using ListaTarefas.Core.Messages;
+﻿using ListaTarefas.Application.ViewModels;
+using ListaTarefas.Core.Messages;
 
 namespace ListaTarefas.Application.Queries
 {
-    public class ListarTarefasQuery : Query
+    public class ListarTarefasQuery : Query<IEnumerable<TarefaViewModel>>
     {
     }
 }

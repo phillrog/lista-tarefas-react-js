@@ -3,6 +3,7 @@ using ListaTarefas.Application.Commands;
 using ListaTarefas.Application.Events;
 using ListaTarefas.Application.Queries;
 using ListaTarefas.Application.Services;
+using ListaTarefas.Application.ViewModels;
 using ListaTarefas.Core.Communication;
 using ListaTarefas.Core.Mediator;
 using ListaTarefas.Domain.Interfaces;
@@ -26,7 +27,7 @@ namespace ListaTarefas.API.Configurations
             services.AddScoped<IRequestHandler<SolicitarEdicaoTarefaCommand, ValidationResult>, TarefaHandler>();
             services.AddScoped<IRequestHandler<SolicitarRemocaoTarefaCommand, ValidationResult>, TarefaHandler>();
 
-            services.AddScoped<IRequestHandler<ListarTarefasQuery, ResponseQueryResult>, TarefaQueryHandler>();
+            services.AddScoped<IRequestHandler<ListarTarefasQuery, IEnumerable<TarefaViewModel>>, TarefaQueryHandler>();
 
             services.AddScoped<INotificationHandler<CadastroSolicitadoEvent>, TarefaEventHandler>();
             services.AddScoped<INotificationHandler<EdicaoSolicitadaEvent>, TarefaEventHandler>();

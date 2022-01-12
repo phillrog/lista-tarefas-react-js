@@ -24,7 +24,7 @@ namespace ListaTarefas.Core.Mediator
             await _mediator.Publish(evento); 
         }
 
-        public async Task<ResponseQueryResult> EnviarQuery<T>(T query) where T : Query
+        public async Task<R> EnviarQuery<T, R>(T query) where T : Query<R>
         {
             return await _mediator.Send(query);
         }
