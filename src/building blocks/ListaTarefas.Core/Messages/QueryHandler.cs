@@ -1,6 +1,4 @@
-﻿using ListaTarefas.Core.Communication;
-
-namespace ListaTarefas.Core.Messages
+﻿namespace ListaTarefas.Core.Messages
 {
     public class QueryHandler<T>
     {

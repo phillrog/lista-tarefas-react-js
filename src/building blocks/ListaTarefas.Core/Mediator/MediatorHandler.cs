@@ -1,5 +1,4 @@
 ﻿using FluentValidation.Results;
-using ListaTarefas.Core.Communication;
 using ListaTarefas.Core.Messages;
 using MediatR;
 

@@ -1,6 +1,5 @@
 ﻿using ListaTarefas.Application.Services;
 using ListaTarefas.Application.ViewModels;
-using ListaTarefas.Core.Communication;
 using ListaTarefas.Core.Messages;
 using MediatR;
 

@@ -1,5 +1,4 @@
-﻿using ListaTarefas.Core.Communication;
-using MediatR;
+﻿using MediatR;
 
 namespace ListaTarefas.Core.Messages
 {
