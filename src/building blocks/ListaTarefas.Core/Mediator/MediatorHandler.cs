@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using ListaTarefas.Core.Communication;
 using ListaTarefas.Core.Messages;
 using MediatR;
 
@@ -21,6 +22,11 @@ namespace ListaTarefas.Core.Mediator
         public async Task PublicarEvento<T>(T evento) where T : Event
         {
             await _mediator.Publish(evento); 
+        }
+
+        public async Task<ResponseQueryResult> EnviarQuery<T>(T query) where T : Query
+        {
+            return await _mediator.Send(query);
         }
     }
 }
