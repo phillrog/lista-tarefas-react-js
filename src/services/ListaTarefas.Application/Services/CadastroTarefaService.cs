@@ -11,6 +11,7 @@ namespace ListaTarefas.Application.Services
         Task Cadastrar(TarefaDTO tarefa);
         Task Editar(TarefaDTO tarefa);
         Task Remover(TarefaDTO tarefa);
+        Task<IEnumerable<TarefaDTO>> Listar();
     }
 
     public class CadastroTarefaService : ICadastroTarefaService
@@ -34,6 +35,12 @@ namespace ListaTarefas.Application.Services
         public async Task Remover(TarefaDTO tarefa)
         {
             await _tarefaServiceDomain.Remover(tarefa.Id);
+        }
+
+        public async Task<IEnumerable<TarefaDTO>> Listar()
+        {
+            var tarefas = await _tarefaServiceDomain.Listar();
+            return tarefas.Select(t => new TarefaDTO(t.Id, t.Descricao, t.Vencimento, (int)t.Status, t.DataCadastro, t.DataAtualizacao));
         }
     }
 }
