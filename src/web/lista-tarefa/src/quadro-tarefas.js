@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { columnsFromBackend } from './colunas';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Tarefas from './tarefas';
+import { FaPlusCircle } from 'react-icons/fa'
 
 const Container = styled.div`
   display: flex;
@@ -36,9 +37,37 @@ const Title = styled.span`
   align-self: flex-start;
 `;
 
+const ButtonAddStyle = {
+  color: '#5183ee',
+  height: '32px',
+  width: '32px',
+  display: 'flex',
+  cursor :'pointer'
+}
+
+const Row = {
+  display: 'flex',
+  'flex-direction': 'row',
+  'flex-wrap': 'wrap',
+  'width': '100%'
+}
+
+const Column = {
+  display: 'flex',
+  'flex-direction': 'column',
+  'flex-basis': '100%',
+  flex: 1,
+  'align-items': 'end',  
+}
+
 const QuadroTarefas = () => {
   const [columns, setColumns] = useState(columnsFromBackend);
-
+  const handlePointerOver = e => {
+    e.target.style.color = "green";
+  }
+  const handlePointerOut = e => {
+    e.target.style.color = "#5183ee";
+  }
   const onDragEnd = (result, columns, setColumns) => {
     if (!result.destination) return;
     const { source, destination } = result;
@@ -88,7 +117,17 @@ const QuadroTarefas = () => {
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                   >
-                    <Title>{column.title}</Title>
+                    <div style={Row}>
+                        <div style={Column}>
+                            <Title>{column.title}</Title>
+                        </div>
+                        <div style={Column}>
+                            <FaPlusCircle style={ButtonAddStyle}
+                            onPointerOver={handlePointerOver}
+                            onPointerOut={handlePointerOut}
+                            ></FaPlusCircle>
+                        </div>
+                    </div>
                     {column.items.map((item, index) => (
                       <Tarefas key={item} item={item} index={index} />
                     ))}
