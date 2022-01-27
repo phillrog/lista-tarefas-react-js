@@ -19,6 +19,8 @@ const TarefasStyle = styled.div`
   border-radius: 5px;
   padding: 15px 15px;
   margin-right: 45px;
+  max-height: 460px;
+  overflow-y: scroll;
 `;
 
 const ColumnStyles = styled.div`
@@ -58,6 +60,7 @@ const Column = {
   'flex-basis': '100%',
   flex: 1,
   'align-items': 'end',  
+  'max-height': '32em'
 }
 
 const QuadroTarefas = () => {

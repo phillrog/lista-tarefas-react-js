@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+
+@media all and (max-width: 500px)
+{
+  .css-fh38mo {
+    flex-direction: column !important;
+    margin: auto 32px;
+    padding-top: 16px !important;
+  }
+  .css-1ubt5ct {
+    
+    flex-wrap: nowrap;
+    min-height: 180px !important;
+    margin: 15px !important;
+  }
+}
+
+@media all and (max-width: 800px)
+{
+  .css-fh38mo {
+    margin: auto 32px;
+  }
+  .css-1ubt5ct {
+    
+    flex-wrap: nowrap;
+    min-height: 180px !important;
+    margin: 15px !important;
+  }
+}

@@ -19,5 +19,10 @@ export const data = [
     id: "4",
     Task: "Criar api",
     Due_Date: "15-Janeiro-2022",
+  },
+  {
+    id: "5",
+    Task: "Testar",
+    Due_Date: "31-Dezembro-2022",
   }
 ]
