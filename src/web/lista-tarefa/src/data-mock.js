@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid"
 export const data = [
   {
     id: "1",
-    Task: "Estudar",
+    Task: "EstudarEstudarEstudarEstudar EstudarEstudarEstudar EstudarEstudar",
     Due_Date: "05-Janeiro-2022",
   },
   {
