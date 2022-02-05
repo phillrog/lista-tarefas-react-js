@@ -50,19 +50,19 @@ const ButtonAddStyle = {
 
 const Row = {
   display: 'flex',
-  'flex-direction': 'row',
-  'flex-wrap': 'wrap',
+  flexDirection: 'row',
+  flexWrap: 'wrap',
   'width': '100%'
 }
 
 const Column = {
   display: 'flex',
-  'flex-direction': 'column',
-  'flex-basis': '100%',
+  flexDirection: 'column',
+  flexBasis: '100%',
   flex: 1,
-  'align-items': 'end',  
-  'max-height': '32em',
-  'text-align': 'justify'
+  alignItems: 'end',  
+  maxHeight: '32em',
+  textAlign: 'justify'
 }
 
 const QuadroTarefas = () => {
@@ -116,9 +116,10 @@ const QuadroTarefas = () => {
         <ColumnStyles>
           {Object.entries(columns).map(([columnId, column], index) => {
             return (
-              <Droppable key={columnId} droppableId={columnId}>
+              <Droppable key={`${columnId}${index}`} droppableId={columnId}>
                 {(provided, snapshot) => (
                   <TarefasStyle
+                    key={index}
                     ref={provided.innerRef}
                     {...provided.droppableProps}
                   >
@@ -134,7 +135,7 @@ const QuadroTarefas = () => {
                         </div>
                     </div>
                     {column.items.map((item, index) => (
-                      <Tarefas key={item} item={item} index={index} />
+                      <Tarefas key={`${item}${index}`} item={item} index={index} />
                     ))}
                     {provided.placeholder}
                   </TarefasStyle>
