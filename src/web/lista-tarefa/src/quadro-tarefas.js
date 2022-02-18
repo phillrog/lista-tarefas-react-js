@@ -3,7 +3,8 @@ import styled from '@emotion/styled';
 import { columnsFromBackend } from './colunas';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Tarefas from './tarefas';
-import { FaPlusCircle } from 'react-icons/fa'
+import { FaPlusCircle } from 'react-icons/fa';
+import { ModalCadastroTarefa } from './modal';
 
 const Container = styled.div`
   display: flex;
@@ -65,8 +66,30 @@ const Column = {
   textAlign: 'justify'
 }
 
-const QuadroTarefas = () => {
-  const [columns, setColumns] = useState(columnsFromBackend);
+const QuadroTarefas = (props) => {
+  const [isOpen, setState] = useState(false);    
+  const openModal = () => setState( true);
+  const closeModal = () => setState(false);  
+  const criarTarefa = (tarefa) => {
+    debugger
+    const column = columns[tarefa.droppableId];
+      const copiedItems = [{
+        id: column.items.length -1,
+        Task: tarefa.descricao,
+        Due_Date: new Date(),
+      }, ...column.items];
+      const [removed] = copiedItems.splice(0, 1);
+      copiedItems.splice(0, 0, removed);
+      setColumns({
+        ...columns,
+        [tarefa.droppableId]: {
+          ...column,
+          items: copiedItems,
+        },
+      });
+    console.log(tarefa)
+  }
+  let [columns, setColumns] = useState(columnsFromBackend);
   const handlePointerOver = e => {
     e.target.style.color = "green";
   }
@@ -74,6 +97,7 @@ const QuadroTarefas = () => {
     e.target.style.color = "#5183ee";
   }
   const onDragEnd = (result, columns, setColumns) => {
+
     if (!result.destination) return;
     const { source, destination } = result;
     if (source.droppableId !== destination.droppableId) {
@@ -109,6 +133,7 @@ const QuadroTarefas = () => {
     }
   };
   return (
+    
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
     >
@@ -118,6 +143,7 @@ const QuadroTarefas = () => {
             return (
               <Droppable key={`${columnId}${index}`} droppableId={columnId}>
                 {(provided, snapshot) => (
+                  
                   <TarefasStyle
                     key={index}
                     ref={provided.innerRef}
@@ -131,7 +157,16 @@ const QuadroTarefas = () => {
                             <FaPlusCircle style={ButtonAddStyle}
                             onPointerOver={handlePointerOver}
                             onPointerOut={handlePointerOut}
+                            onClick={openModal}
                             ></FaPlusCircle>
+                            <ModalCadastroTarefa show={isOpen}
+                            onHide={closeModal}
+                            onCriarTarefa={criarTarefa}
+                            droppableId={columnId}
+                            columns={columns} 
+                            >
+                            
+                            </ModalCadastroTarefa>
                         </div>
                     </div>
                     {column.items.map((item, index) => (
@@ -143,9 +178,9 @@ const QuadroTarefas = () => {
               </Droppable>
             );
           })}
-        </ColumnStyles>
+        </ColumnStyles>        
       </Container>
-    </DragDropContext>
+    </DragDropContext>    
   );
 };
 

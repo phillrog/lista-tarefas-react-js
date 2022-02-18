@@ -1,45 +1,66 @@
 
 import React from "react";
 import  { Component } from 'react';
-import { Form, Modal, Button } from 'reactstrap';
+import { Form, Modal, Button } from 'react-bootstrap';
 
-export default class ModalCadastroTarefa extends Component  {
+export class ModalCadastroTarefa extends Component  {
 
   constructor(props) {
-    super(props)
-  }
-  handleClick(status) {
+    super(props);
+    this.state = {
+      descricao: ''
+    };
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  render(props) {  
-      
+  handleChange(event) {
+    this.setState({descricao: event.target.value});
+  }
+
+  handleSubmit(event) {
+    this.novaTarefa({ descricao : this.state.descricao, 
+      droppableId : this.props.droppableId, 
+      columns : this.props.columns
+    });
+    event.preventDefault();
+  }
+
+  novaTarefa(valor) {
+    this.props.onCriarTarefa(valor)
+  }
+  
+  render() {  
+
         return (
           <>            
             <Modal
-              {...props}
+              show={this.props.show} 
+              onHide={this.props.onHide}
               size="lg"
               aria-labelledby="contained-modal-title-vcenter"
               centered
             >
-              <Modal.Header closeButton>
-                <Modal.Title>Inserir nova tarefa</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Descrição</Form.Label>
-                        <Form.Control  as="textarea" placeholder="Informe a descrição da tarefa" />
-                        
-                    </Form.Group>                                
+            <Form onSubmit={this.handleSubmit}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Inserir nova tarefa</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  
+                      <Form.Group className="mb-3" controlId="formBasicEmail">
+                          <Form.Label>Descrição</Form.Label>
+                          <Form.Control  as="textarea" name="descricao" placeholder="Informe a descrição da tarefa" 
+                          value={this.state.descricao} 
+                          onChange={this.handleChange} 
+                          />
+                          
+                      </Form.Group>                                
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary" type="submit" onClick={this.props.onHide}>Confirmar</Button>
+                </Modal.Footer>
                 </Form>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={() => this.handleClick(false)}>
-                  Fechar
-                </Button>
-                <Button variant="primary">Confirmar</Button>
-              </Modal.Footer>
             </Modal>
           </>
         );
