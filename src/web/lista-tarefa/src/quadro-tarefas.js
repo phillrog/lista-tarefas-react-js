@@ -5,6 +5,7 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Tarefas from './tarefas';
 import { FaPlusCircle } from 'react-icons/fa';
 import { ModalCadastroTarefa } from './modal';
+import { v4 as uuidv4 } from "uuid"
 
 const Container = styled.div`
   display: flex;
@@ -67,19 +68,27 @@ const Column = {
 }
 
 const QuadroTarefas = (props) => {
-  const [isOpen, setState] = useState(false);    
-  const openModal = () => setState( true);
-  const closeModal = () => setState(false);  
+  const [isOpen, setState] = useState(false);   
+  const [columnId, setDroppableId] = useState(null); 
+  const [colunas, setColunas] = useState(null); 
+  
+  const openModal = (id, listaColunas) => {
+    setDroppableId(id); 
+    setState( true);
+    setColunas(listaColunas);
+  };
+  const closeModal = () => {
+    setState(false);  
+  }
   const criarTarefa = (tarefa) => {
-    debugger
-    const column = columns[tarefa.droppableId];
+
+      const column = columns[tarefa.droppableId];
       const copiedItems = [{
-        id: column.items.length -1,
+        id: `${uuidv4()}`,
         Task: tarefa.descricao,
-        Due_Date: new Date(),
+        Due_Date: `${tarefa.vencimento}T00:00:00`,
       }, ...column.items];
-      const [removed] = copiedItems.splice(0, 1);
-      copiedItems.splice(0, 0, removed);
+
       setColumns({
         ...columns,
         [tarefa.droppableId]: {
@@ -87,7 +96,7 @@ const QuadroTarefas = (props) => {
           items: copiedItems,
         },
       });
-    console.log(tarefa)
+    
   }
   let [columns, setColumns] = useState(columnsFromBackend);
   const handlePointerOver = e => {
@@ -133,7 +142,18 @@ const QuadroTarefas = (props) => {
     }
   };
   return (
-    
+    <>
+    { isOpen === true &&
+    <ModalCadastroTarefa                                                         
+                            show={isOpen}
+                            onHide={closeModal}
+                            onCriarTarefa={criarTarefa}
+                            droppableId={columnId}
+                            columns={colunas} 
+                            >
+                            
+                            </ModalCadastroTarefa>
+}
     <DragDropContext
       onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
     >
@@ -157,16 +177,9 @@ const QuadroTarefas = (props) => {
                             <FaPlusCircle style={ButtonAddStyle}
                             onPointerOver={handlePointerOver}
                             onPointerOut={handlePointerOut}
-                            onClick={openModal}
+                            onClick={() => openModal(columnId, columns)}
                             ></FaPlusCircle>
-                            <ModalCadastroTarefa show={isOpen}
-                            onHide={closeModal}
-                            onCriarTarefa={criarTarefa}
-                            droppableId={columnId}
-                            columns={columns} 
-                            >
                             
-                            </ModalCadastroTarefa>
                         </div>
                     </div>
                     {column.items.map((item, index) => (
@@ -181,6 +194,7 @@ const QuadroTarefas = (props) => {
         </ColumnStyles>        
       </Container>
     </DragDropContext>    
+    </>
   );
 };
 
