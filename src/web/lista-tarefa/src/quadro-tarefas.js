@@ -7,6 +7,8 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { ModalCadastroTarefa } from './modal';
 import { v4 as uuidv4 } from "uuid"
 
+import api from './services/api'; 
+
 const Container = styled.div`
   display: flex;
   justify-content: space-around;
@@ -97,6 +99,7 @@ const QuadroTarefas = (props) => {
         },
       });
     
+      api.novaTarefa(tarefa.descricao, tarefa.vencimento);
   }
   let [columns, setColumns] = useState(columnsFromBackend);
   const handlePointerOver = e => {
