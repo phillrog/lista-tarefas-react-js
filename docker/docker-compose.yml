@@ -1,0 +1,34 @@
+version: '3.4'
+
+
+services:
+  sql.data:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: dev_sql
+    environment:
+              - ASPNETCORE_ENVIRONMENT=Development
+              - SA_PASSWORD=yourStrong#@Teste
+              - ACCEPT_EULA=Y
+
+    ports:
+              - "1435:1433"
+    networks:
+              - local              
+    volumes:
+      - sql_data:/var/opt/mssql/data  
+      
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+              - 5672:5672
+              - 15672:15672
+    networks:
+              - local    
+
+networks:
+    local:
+        driver: bridge
+
+volumes:
+  sql_data:
+    driver: local
