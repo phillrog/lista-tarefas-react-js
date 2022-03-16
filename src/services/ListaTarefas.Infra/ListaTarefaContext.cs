@@ -2,6 +2,7 @@
 using ListaTarefas.Core.Data;
 using ListaTarefas.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace ListaTarefas.Infra
 {
@@ -43,6 +44,13 @@ namespace ListaTarefas.Infra
                 .SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ListaTarefaContext).Assembly);
             base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging()
+                .LogTo(Console.WriteLine, LogLevel.Information);
+            base.OnConfiguring(optionsBuilder);
         }
     }
 }
