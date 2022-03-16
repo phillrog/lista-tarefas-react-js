@@ -4,6 +4,7 @@ using ListaTarefas.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ListaTarefas.Infra.Migrations
 {
     [DbContext(typeof(ListaTarefaContext))]
-    partial class ListaTarefaContextModelSnapshot : ModelSnapshot
+    [Migration("20220316001108_AjustetamanhoColuna")]
+    partial class AjustetamanhoColuna
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace ListaTarefas.Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tarefas", (string)null);
+                    b.ToTable("Tarefas");
                 });
 #pragma warning restore 612, 618
         }
