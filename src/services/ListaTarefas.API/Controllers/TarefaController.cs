@@ -55,7 +55,7 @@ namespace ListaTarefas.API.Controllers
         public async Task<IActionResult> Listar()
         {            
             var query = new ListarTarefasQuery();
-            var result = await _mediator.EnviarQuery<ListarTarefasQuery, IEnumerable<TarefaViewModel>>(query);
+            var result = await _mediator.EnviarQuery<ListarTarefasQuery, IEnumerable<RetornoViewModel>>(query);
 
             return CustomResponse(new { Data = result });
         }

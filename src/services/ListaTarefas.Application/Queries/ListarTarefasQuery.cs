@@ -3,7 +3,7 @@ using ListaTarefas.Core.Messages;
 
 namespace ListaTarefas.Application.Queries
 {
-    public class ListarTarefasQuery : Query<IEnumerable<TarefaViewModel>>
+    public class ListarTarefasQuery : Query<IEnumerable<RetornoViewModel>>
     {
     }
 }

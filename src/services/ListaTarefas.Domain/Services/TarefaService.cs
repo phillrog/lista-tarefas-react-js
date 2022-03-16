@@ -1,4 +1,5 @@
 ﻿using ListaTarefas.Domain.Entities;
+using ListaTarefas.Domain.Enums;
 using ListaTarefas.Domain.Interfaces;
 
 namespace ListaTarefas.Domain.Services
@@ -41,7 +42,7 @@ namespace ListaTarefas.Domain.Services
 
         public async Task<IEnumerable<Tarefa>> Listar()
         {
-            return await _tarefaRepository.ObterTodos();
+            return await _tarefaRepository.ObterTodos(p => p.Status != StatusEnum.Cancelada);
         }
     }
 }
