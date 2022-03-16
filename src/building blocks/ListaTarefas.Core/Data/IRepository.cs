@@ -13,5 +13,6 @@ namespace ListaTarefas.Core.Data
 		Task Remover(Guid id);
 		Task<IEnumerable<T>> Buscar(Expression<Func<T, bool>> predicate);
 		Task<int> SaveChanges();
+		Task<List<T>> ObterTodos(Expression<Func<T, bool>> predicate);
 	}
 }

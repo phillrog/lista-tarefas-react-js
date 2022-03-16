@@ -58,5 +58,11 @@ namespace ListaTarefas.Infra.Data.Repositories
 		{
 			_dbContext?.Dispose();
 		}
-	}
+
+        public virtual async Task<List<TEntity>> ObterTodos(Expression<Func<TEntity, bool>> predicate)
+        {
+			return await _dbSet.AsNoTracking().Where(predicate).ToListAsync();
+
+		}
+    }
 }
