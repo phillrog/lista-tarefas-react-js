@@ -70,12 +70,14 @@ export class ModalCadastroTarefa extends Component  {
 
   handleSubmit(event) {
     event.preventDefault();
+
     if (this.handleValidation()) {
         this.novaTarefa({ 
           descricao : this.state.campos.descricao, 
           vencimento: this.state.campos.vencimento,
           droppableId : this.props.droppableId, 
-          columns : this.props.columns
+          columns : this.props.columns,
+          status: this.props.columns[this.props.droppableId].title
         });
         
         this.props.onHide();

@@ -99,7 +99,7 @@ const QuadroTarefas = (props) => {
         },
       });
     
-      api.novaTarefa(tarefa.descricao, tarefa.vencimento);
+      api.novaTarefa(tarefa.descricao, tarefa.vencimento, tarefa.status);
   }
   let [columns, setColumns] = useState(columnsFromBackend);
   const handlePointerOver = e => {
