@@ -16,7 +16,7 @@ namespace ListaTarefas.Application.Consumers
         public async Task Consume(ConsumeContext<ICadastroSolicitado> context)
         {
             var message = context.Message;
-            await _cadastroTarefaService.Cadastrar(new TarefaDTO(message.Descricao, message.Vencimento));
+            await _cadastroTarefaService.Cadastrar(new TarefaDTO(message.Descricao, message.Vencimento, message.Status));
         }
     }
 }

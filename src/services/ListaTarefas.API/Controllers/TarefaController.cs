@@ -20,7 +20,7 @@ namespace ListaTarefas.API.Controllers
         [HttpPost("nova-tarefa")]
         public async Task<IActionResult> CadastrarTarefa(CadastrarTarefaViewModel viewModel)
         {
-            var comando = new SolicitarCadastroTarefaCommand(viewModel.Descricao, viewModel.Vencimento);
+            var comando = new SolicitarCadastroTarefaCommand(viewModel.Descricao, viewModel.Vencimento, viewModel.Status);
             var result = await _mediator.EnviarComando<SolicitarCadastroTarefaCommand>(comando);
             if (!OperacaoValida()) CustomResponse(result);
 

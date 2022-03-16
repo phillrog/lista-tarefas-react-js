@@ -24,7 +24,7 @@ namespace ListaTarefas.Application.Services
         }
         public async Task Cadastrar(TarefaDTO tarefa)
         {
-            await _tarefaServiceDomain.Adicionar(new Tarefa(tarefa.Descricao, tarefa.Vencimento, StatusEnum.AFazer));
+            await _tarefaServiceDomain.Adicionar(new Tarefa(tarefa.Descricao, tarefa.Vencimento, (StatusEnum)tarefa.Status));
         }
 
         public async Task Editar(TarefaDTO tarefa)

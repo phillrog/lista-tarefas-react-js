@@ -11,10 +11,11 @@ namespace ListaTarefas.Application.DTOs
         public DateTime DataCadastro { get; set; }
         public DateTime? DataAtualizacao { get; set; }
 
-        public TarefaDTO(string descricao, DateTime vencimento)
+        public TarefaDTO(string descricao, DateTime vencimento, int status)
         {
             Descricao = descricao;
             Vencimento = vencimento;
+            Status = status;
         }
 
         public TarefaDTO(Guid id, string descricao, DateTime vencimento, int status)

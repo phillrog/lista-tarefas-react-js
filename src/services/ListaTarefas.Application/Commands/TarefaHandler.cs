@@ -37,7 +37,7 @@ namespace ListaTarefas.Application.Commands
                 return ValidationResult;
             }
 
-            await _mediator.PublicarEvento<CadastroSolicitadoEvent>(new CadastroSolicitadoEvent(message.Descricao, message.Vencimento));
+            await _mediator.PublicarEvento<CadastroSolicitadoEvent>(new CadastroSolicitadoEvent(message.Descricao, message.Vencimento, message.Status));
 
             return ValidationResult;
         }

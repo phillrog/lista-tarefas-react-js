@@ -21,6 +21,7 @@ namespace ListaTarefas.Application.Events
             {
                 message.AggregateId,
                 message.Descricao,
+                message.Status,
                 message.MessageType,
                 message.Timestamp,
                 message.Vencimento

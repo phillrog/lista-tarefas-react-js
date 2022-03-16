@@ -7,10 +7,12 @@ namespace ListaTarefas.Application.Commands
     {
         public string Descricao { get; private set; }
         public DateTime Vencimento { get; private set; }
-        public SolicitarCadastroTarefaCommand(string descricao, DateTime vencimento)
+        public int Status { get; set; }
+        public SolicitarCadastroTarefaCommand(string descricao, DateTime vencimento, int quadro)
         {
             Descricao = descricao;
             Vencimento = vencimento;
+            Status = quadro;
             AggregateId = Guid.NewGuid();
         }
 
@@ -35,6 +37,10 @@ namespace ListaTarefas.Application.Commands
             RuleFor(m => m.Vencimento)
                 .NotNull()
                 .WithMessage("Data de vencimento inválida");
+
+            RuleFor(m => m.Status)
+                .InclusiveBetween(0, 2)
+                .WithMessage("Quadro não encontrado");
         }
     }
 }
