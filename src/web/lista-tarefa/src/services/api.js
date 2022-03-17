@@ -18,6 +18,13 @@ const api = {
     .catch((err) => {
       console.error("ops! ocorreu um erro" + err);
     });
+  },
+  listar: () => {
+    tarefaController.get("listar")
+    .then((response) => console.log(response))
+    .catch((err) => {
+      console.error("ops! ocorreu um erro" + err);
+    });
   }
 };
 
