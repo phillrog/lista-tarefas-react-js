@@ -19,13 +19,16 @@ const api = {
       console.error("ops! ocorreu um erro" + err);
     });
   },
-  listar: () => {
-    tarefaController.get("listar")
-    .then((response) => console.log(response))
+  listar: async() => {
+    return await tarefaController.get("listar")
+    .then((response) => {
+      if(response.status === 200) return response.data.data;
+      else return [];
+    })
     .catch((err) => {
       console.error("ops! ocorreu um erro" + err);
     });
-  }
+  } 
 };
 
 export default api;

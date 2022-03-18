@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { columnsFromBackend } from './colunas';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -7,7 +7,7 @@ import { FaPlusCircle } from 'react-icons/fa';
 import { ModalCadastroTarefa } from './modal';
 import { v4 as uuidv4 } from "uuid"
 
-import api from './services/api'; 
+import api from './services/api';
 
 const Container = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ const ButtonAddStyle = {
   height: '32px',
   width: '32px',
   display: 'flex',
-  cursor :'pointer'
+  cursor: 'pointer'
 }
 
 const Row = {
@@ -64,42 +64,42 @@ const Column = {
   flexDirection: 'column',
   flexBasis: '100%',
   flex: 1,
-  alignItems: 'end',  
+  alignItems: 'end',
   maxHeight: '32em',
   textAlign: 'justify'
 }
 
 const QuadroTarefas = (props) => {
-  const [isOpen, setState] = useState(false);   
-  const [columnId, setDroppableId] = useState(null); 
-  const [colunas, setColunas] = useState(null); 
-  
+  const [isOpen, setState] = useState(false);
+  const [columnId, setDroppableId] = useState(null);
+  const [colunas, setColunas] = useState(null);
+
   const openModal = (id, listaColunas) => {
-    setDroppableId(id); 
-    setState( true);
+    setDroppableId(id);
+    setState(true);
     setColunas(listaColunas);
   };
   const closeModal = () => {
-    setState(false);  
+    setState(false);
   }
   const criarTarefa = (tarefa) => {
 
-      const column = columns[tarefa.droppableId];
-      const copiedItems = [{
-        id: `${uuidv4()}`,
-        Task: tarefa.descricao,
-        Due_Date: `${tarefa.vencimento}T00:00:00`,
-      }, ...column.items];
+    const column = columns[tarefa.droppableId];
+    const copiedItems = [{
+      id: `${uuidv4()}`,
+      Task: tarefa.descricao,
+      Due_Date: `${tarefa.vencimento}T00:00:00`,
+    }, ...column.items];
 
-      setColumns({
-        ...columns,
-        [tarefa.droppableId]: {
-          ...column,
-          items: copiedItems,
-        },
-      });
-    
-      api.novaTarefa(tarefa.descricao, tarefa.vencimento, tarefa.status);
+    setColumns({
+      ...columns,
+      [tarefa.droppableId]: {
+        ...column,
+        items: copiedItems,
+      },
+    });
+
+    api.novaTarefa(tarefa.descricao, tarefa.vencimento, tarefa.status);
   }
   let [columns, setColumns] = useState(columnsFromBackend);
   const handlePointerOver = e => {
@@ -144,59 +144,69 @@ const QuadroTarefas = (props) => {
       });
     }
   };
+
+
+  const [tarefas, setTarefas] = useState([]);
+  useEffect(() => {
+    let isSubscribed = true;
+    api.listar().then(response => response).then(data => isSubscribed ? setTarefas(data) : null);
+    console.log(tarefas);
+    return () => (isSubscribed = false);
+  }, []);
+
   return (
     <>
-    { isOpen === true &&
-    <ModalCadastroTarefa                                                         
-                            show={isOpen}
-                            onHide={closeModal}
-                            onCriarTarefa={criarTarefa}
-                            droppableId={columnId}
-                            columns={colunas} 
-                            >
-                            
-                            </ModalCadastroTarefa>
-}
-    <DragDropContext
-      onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
-    >
-      <Container>
-        <ColumnStyles>
-          {Object.entries(columns).map(([columnId, column], index) => {
-            return (
-              <Droppable key={`${columnId}${index}`} droppableId={columnId}>
-                {(provided, snapshot) => (
-                  
-                  <TarefasStyle
-                    key={index}
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    <div style={Row}>
+      {isOpen === true &&
+        <ModalCadastroTarefa
+          show={isOpen}
+          onHide={closeModal}
+          onCriarTarefa={criarTarefa}
+          droppableId={columnId}
+          columns={colunas}
+        >
+
+        </ModalCadastroTarefa>
+      }
+      <DragDropContext
+        onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
+      >
+        <Container>
+          <ColumnStyles>
+            {Object.entries(columns).map(([columnId, column], index) => {
+              return (
+                <Droppable key={`${columnId}${index}`} droppableId={columnId}>
+                  {(provided, snapshot) => (
+
+                    <TarefasStyle
+                      key={index}
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      <div style={Row}>
                         <div style={Column}>
-                            <Title>{column.title}</Title>
+                          <Title>{column.title}</Title>
                         </div>
                         <div style={Column}>
-                            <FaPlusCircle style={ButtonAddStyle}
+                          <FaPlusCircle style={ButtonAddStyle}
                             onPointerOver={handlePointerOver}
                             onPointerOut={handlePointerOut}
                             onClick={() => openModal(columnId, columns)}
-                            ></FaPlusCircle>
-                            
+                          ></FaPlusCircle>
+
                         </div>
-                    </div>
-                    {column.items.map((item, index) => (
-                      <Tarefas key={`${item}${index}`} item={item} index={index} />
-                    ))}
-                    {provided.placeholder}
-                  </TarefasStyle>
-                )}
-              </Droppable>
-            );
-          })}
-        </ColumnStyles>        
-      </Container>
-    </DragDropContext>    
+                      </div>
+                      {column.items.map((item, index) => (
+                        <Tarefas key={`${item}${index}`} item={item} index={index} />
+                      ))}
+                      {provided.placeholder}
+                    </TarefasStyle>
+                  )}
+                </Droppable>
+              );
+            })}
+          </ColumnStyles>
+        </Container>
+      </DragDropContext>
     </>
   );
 };
