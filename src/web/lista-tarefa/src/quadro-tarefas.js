@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { columnsFromBackend } from './colunas';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Tarefas from './tarefas';
-import { FaPlusCircle } from 'react-icons/fa';
+import { FaCommentMedical, FaPlusCircle } from 'react-icons/fa';
 import { ModalCadastroTarefa } from './modal';
 import { v4 as uuidv4 } from "uuid"
 
@@ -84,21 +84,15 @@ const QuadroTarefas = (props) => {
   }
   const criarTarefa = (tarefa) => {
 
-    const column = columns[tarefa.droppableId];
-    const copiedItems = [{
+    const novoItem = {
       id: `${uuidv4()}`,
       Task: tarefa.descricao,
       Due_Date: `${tarefa.vencimento}T00:00:00`,
-    }, ...column.items];
+    };
 
-    setColumns({
-      ...columns,
-      [tarefa.droppableId]: {
-        ...column,
-        items: copiedItems,
-      },
-    });
-
+    const tarefaNova = gravaNoQuadro({ idQuadroTarefa: tarefa.droppableId, itens: [novoItem] });
+    setColumns(tarefaNova);
+    
     api.novaTarefa(tarefa.descricao, tarefa.vencimento, tarefa.status);
   }
   let [columns, setColumns] = useState(columnsFromBackend);
@@ -149,10 +143,53 @@ const QuadroTarefas = (props) => {
   const [tarefas, setTarefas] = useState([]);
   useEffect(() => {
     let isSubscribed = true;
-    api.listar().then(response => response).then(data => isSubscribed ? setTarefas(data) : null);
-    console.log(tarefas);
+    api.listar()
+      .then(response => response)
+      .then(data => {
+        if (isSubscribed) {
+          setTarefas(data);
+          adiciona(data);
+        }
+        return null;
+      });
     return () => (isSubscribed = false);
   }, []);
+
+  const adiciona = (listaTarefas) => {
+    const lista = Object.keys(columns)
+      .map((tt, e, j) => Object.assign({
+        idQuadroTarefa: tt,
+        descricao: columns[tt].title,
+        itens: listaTarefas.length === 0 ? [] : listaTarefas
+          .filter(h => h.descricao === columns[tt].title.replace(' ', ''))
+          .map(k =>
+            k.tarefas
+              .map(f =>
+                Object.assign({
+                  id: f.id,
+                  Task: f.descricao,
+                  Due_Date: f.vencimento
+                }, {})))[0]
+      }, {}));
+
+    let novaCol = Object.assign({ ...columns }, {});
+    lista.forEach((t) => {
+      const tar = gravaNoQuadro(t);
+      novaCol = Object.assign({ ...novaCol, ...tar }, {});
+    });
+    setColumns(novaCol);
+  }
+
+  const gravaNoQuadro = (t) => {
+    const column = columns[t.idQuadroTarefa];
+    const copiedItems = [...t.itens || [], ...column.items];
+    return {
+      [t.idQuadroTarefa]: {
+        title: column.title,
+        items: copiedItems,
+      },
+    };
+  }
 
   return (
     <>
