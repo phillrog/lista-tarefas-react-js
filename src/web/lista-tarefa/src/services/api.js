@@ -21,7 +21,7 @@ const api = {
   listar: async () => {
     return await tarefaController.get("listar")
       .then((response) => {
-        if (response.status === 200) return response.data;
+        if (response.status === 200) return response.data.data;
         else return [];
       })
       .catch((err) => {
