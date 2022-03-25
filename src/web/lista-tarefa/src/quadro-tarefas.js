@@ -92,7 +92,7 @@ const QuadroTarefas = (props) => {
 
     const tarefaNova = gravaNoQuadro({ idQuadroTarefa: tarefa.droppableId, itens: [novoItem] });
     setColumns(tarefaNova);
-    
+
     api.novaTarefa(tarefa.descricao, tarefa.vencimento, tarefa.status);
   }
   let [columns, setColumns] = useState(columnsFromBackend);
